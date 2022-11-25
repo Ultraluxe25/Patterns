@@ -1,3 +1,7 @@
+"""
+Дан файл состоящий из нескольких предложений. Нужно найти длину наименьшего и наибольшего предложение и вывести их длины и сами предложения
+"""
+
 intermediate_sentences = []
 final_sentences = []
 
@@ -10,8 +14,8 @@ def remove_blank_string(text):
 
 def function_separator(text, sign):
     if sign in text:
-        inner_sentence = text.replace(sign, '+' + sign).split(sign)
-        for single_sentence in inner_sentence:
+        text = text.replace(sign, '+' + sign).split(sign)
+        for single_sentence in text:
             intermediate_sentences.append(single_sentence.replace('\n', '').replace('+', sign).strip())
 
 
@@ -22,7 +26,8 @@ with open('genii_Makarenko_1.txt', 'r', encoding='UTF-8') as file:
     for sentence in sentences:
         function_separator(sentence, '!')
         function_separator(sentence, '?')
-        intermediate_sentences.append(sentence.strip())
+        if '!' not in sentence and '?' not in sentence:
+            intermediate_sentences.append(sentence.strip())
         # if '?' in sentence:
         #     inner_sentence = sentence.replace('?', '+?').split('?')
         #     for single_sentence in inner_sentence:
